@@ -11,12 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rohansahai/nfl_pickem.git"
+    "url": "git+https://github.com/aroncey/nfl_pickem.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rohansahai/nfl_pickem/issues"
+    "url": "https://github.com/aroncey/nfl_pickemissues"
   },
-  "homepage": "https://github.com/rohansahai/nfl_pickem#readme"
+  "homepage": "https://github.com/aroncey/nfl_pickem#readme",
+  "dependencies": {
+    "materialize-css": "^1.0.0"
+  }
 }
