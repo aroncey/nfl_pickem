@@ -171,22 +171,20 @@ class EmailBodyError(Exception):
 
 def get_nfl_week_num():
     """
-    returns: Use beginning and end dates of 2017 nfl season to map weeks to date ranges.
+    returns: Use beginning and end dates of 2019 nfl season to map weeks to date ranges.
     Use today's date to determine what week of the season we fall under. Return week (int).
     """
     import pandas as pd
     from datetime import datetime as dt
-    week_begin = pd.date_range(start='2019-09-04', end='2019-12-28', freq='7D')
-    week_end = pd.date_range(start='2018-09-10', end='2019-01-02', freq='7D')
+    week_begin = pd.date_range(start='2019-09-04', end='2019-12-29', freq='7D')
+    week_end = pd.date_range(start='2019-09-10', end='2020-01-03', freq='7D')
     week_nums = list(range(1, 18))
-    week_lol = [[dt(2019, 8, 1), dt(2019, 9, 3), 1]] + [[week_b, week_e, num] for week_b, week_e, num in
-                                                        zip(week_begin, week_end, week_nums)]
+    week_lol = [[week_b, week_e, num] for week_b, week_e, num in zip(week_begin, week_end, week_nums)]
 
     today = dt(dt.today().year, dt.today().month, dt.today().day)
     today = convert_tz(today)
     week_mapping_df = pd.DataFrame(week_lol, columns=['Week_Begin', 'Week_End', 'Week_Num'])
-    week = week_mapping_df.loc[(week_mapping_df['Week_Begin'] <= today) &
-                               (week_mapping_df['Week_End'] <= today)]['Week_Num'].iloc[0]
+    week = week_mapping_df[(week_mapping_df['Week_Begin'] <= today) & (week_mapping_df['Week_End'] >= today)]['Week_Num'].iloc[0]
 
     return week
 
@@ -211,31 +209,31 @@ def convert_tz(x, est_to_utc=False):
         return x
 
 
-# def send_html_email(email_body, subject, sender, recipient):
-#     """ Send an html email using smtp server. Only call this when using email tracebacks.
-#     email_body: html input for your message
-#     subject: subject line as string
-#     sender: sender email address as string
-#     recipient: semicolon delimited string of recipients
-#     """
-#
-#     import smtplib
-#     from email.mime.multipart import MIMEMultipart
-#     from email.mime.text import MIMEText
-#
-#     msg = MIMEMultipart('alternative')
-#     msg['Subject'] = subject
-#     msg['From'] = sender
-#     msg['To'] = recipient
-#
-#     part = MIMEText(email_body, 'html')
-#
-#     msg.attach(part)
-#
-#     server = smtplib.SMTP('smtp.gmail.com:587')
-#     server.ehlo()
-#     server.starttls()
-#     username, pw = get_gmail_creds()
-#     server.login(username, pw)
-#     server.sendmail(sender, recipient.split(';'), msg.as_string())
-#     server.close()
+def send_html_email(email_body, subject, sender, recipient):
+    """ Send an html email using smtp server. Only call this when using email tracebacks.
+    email_body: html input for your message
+    subject: subject line as string
+    sender: sender email address as string
+    recipient: semicolon delimited string of recipients
+    """
+
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = recipient
+
+    part = MIMEText(email_body, 'html')
+
+    msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com:587')
+    server.ehlo()
+    server.starttls()
+    username, pw = get_gmail_creds()
+    server.login(username, pw)
+    server.sendmail(sender, recipient.split(';'), msg.as_string())
+    server.close()

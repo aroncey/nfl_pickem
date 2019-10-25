@@ -4,7 +4,8 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
 import numpy as np
-from db import update, get_ff_url, get_local_str
+from db import update, get_ff_url
+# from db import get_local_str
 from util import get_nfl_week_num, convert_tz
 import random
 import time
@@ -73,7 +74,7 @@ def identify_live_games(row):
     if row['game_status'] == 'Final':
         game_live = 0
         game_status = row['game_status']
-    elif row['game_status'] == 'OT':
+    elif row['game_status'] == 'Final OT':
         game_live = 0
         game_status = 'Final (OT)'
     else:
@@ -93,8 +94,9 @@ def insert_possession_team(row, team_mapping):
     if '&' in row['game_status']:
         game_status = row['game_status']
         try:
-            i = game_status.index('at') - 1
-            down = game_status[10:i]
+            down_begin = game_status.index('&') - 4
+            down_end = game_status.index('at') - 1
+            down = game_status[down_begin:down_end]
         except ValueError:
             pass
 
@@ -273,12 +275,11 @@ def update_picks_table_with_result(current_week, prod_str):
 
 def main():
 
-    prod_str = create_engine(os.environ['ENGINE_STR'])
+    prod_str = os.environ['ENGINE_STR']
     # prod_str = get_local_str()
     current_week = get_nfl_week_num()
     game_live = is_there_game_on(current_week, prod_str)
     if game_live:
-        # prod_str = get_local_str()
         delay = random.randrange(1, 120)
         time.sleep(delay)
         url = get_ff_url(current_week)

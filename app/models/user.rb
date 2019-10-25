@@ -3,7 +3,9 @@ class User < ApplicationRecord
   has_many :leagues_users, dependent: :destroy
   has_many :leagues, through: :leagues_users
 
-  def self.from_omniauth(auth, league_to_join)
+  attr_accessor :current_league
+
+  def self.from_omniauth(auth, league_to_join_id)
     if ENV['NEW_SIGNUPS']
       where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
         user.provider = auth.provider
@@ -14,7 +16,11 @@ class User < ApplicationRecord
         user.oauth_expires_at = Time.at(auth.credentials.expires_at)
         user.save!
 
-        LeaguesUser.find_or_create_by(user_id: user.id, league_id: league_to_join)
+        if !league_to_join_id.nil?
+          LeaguesUser.find_or_create_by(user_id: user.id, league_id: league_to_join_id)
+        elsif user.leagues.empty?
+          LeaguesUser.find_or_create_by(user_id: user.id, league_id: ENV['MASTER_LEAGUE_ID'])
+        end
       end
     else
       where(provider: auth.provider, uid: auth.uid).first
@@ -40,22 +46,27 @@ class User < ApplicationRecord
   end
 
   def wins
-    picks.where(:result => 'win').count
+    fail 'must have current league set' if !@current_league
+    picks.where(:league_id => @current_league.id, :result => 'win').count
   end
 
   def losses
-    picks.where(:result => 'loss').count
+    fail 'must have current league set' if !@current_league
+    picks.where(:league_id => @current_league.id, :result => 'loss').count
   end
 
   def pushes
-    picks.where(:result => 'push').count
+    fail 'must have current league set' if !@current_league
+    picks.where(:league_id => @current_league.id, :result => 'push').count
   end
 
   def points
+    fail 'must have current league set' if !@current_league
     wins + (pushes * 0.5)
   end
 
   def percent
+    fail 'must have current league set' if !@current_league
     total = wins + losses + pushes
     if total > 0
       perc = (wins + (pushes * 0.5))  / total * 100
@@ -66,9 +77,10 @@ class User < ApplicationRecord
   end
 
   def week_standings
+    fail 'must have current league set' if !@current_league
     week = Game.get_week
     week_standings = Hash.new
-    weekly_picks = picks.group(:week).group(:result).count.sort_by {|k, v| v}.reverse.to_h
+    weekly_picks = picks.where(league_id: current_league.id).group(:week).group(:result).count.sort_by {|k, v| v}.reverse.to_h
     week.downto(1).each do |this_week|
       week_wins = weekly_picks[[this_week, "win"]] ||= 0
       week_pushes = weekly_picks[[this_week, "push"]] ||= 0
