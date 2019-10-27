@@ -1,5 +1,4 @@
-source 'https://rubygems.org'
-
+source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -36,6 +35,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
 
   gem 'rspec-rails', '~> 3.5'
+  ruby "2.6.3"
 end
 
 group :development do
@@ -72,5 +72,4 @@ gem 'momentjs-rails'
 
 gem 'twilio-ruby', '~> 4.11.1'
 
-source "https://rubygems.org"
 ruby "2.6.3"
