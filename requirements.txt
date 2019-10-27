@@ -7,3 +7,4 @@ sqlalchemy
 psycopg2
 numpy==1.11.0
 setuptools==0.7.3
+gunicorn==0.17.2
