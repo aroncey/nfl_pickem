@@ -71,4 +71,4 @@ gem 'momentjs-rails'
 
 gem 'twilio-ruby', '~> 4.11.1'
 
-ruby "2.4.0"
+ruby "2.4.6"
