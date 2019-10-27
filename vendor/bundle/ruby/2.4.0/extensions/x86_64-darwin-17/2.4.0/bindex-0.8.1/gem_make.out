@@ -1,0 +1,15 @@
+current directory: /Users/arthurroncey/code/nfl_pickem_2019/aroncey/nfl_pickem/vendor/bundle/ruby/2.4.0/gems/bindex-0.8.1/ext/skiptrace
+/Users/arthurroncey/.rvm/rubies/ruby-2.4.6/bin/ruby -I /Users/arthurroncey/.rvm/rubies/ruby-2.4.6/lib/ruby/site_ruby/2.4.0 -r ./siteconf20191027-85892-p28bic.rb extconf.rb
+creating Makefile
+
+current directory: /Users/arthurroncey/code/nfl_pickem_2019/aroncey/nfl_pickem/vendor/bundle/ruby/2.4.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /Users/arthurroncey/code/nfl_pickem_2019/aroncey/nfl_pickem/vendor/bundle/ruby/2.4.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+
+current directory: /Users/arthurroncey/code/nfl_pickem_2019/aroncey/nfl_pickem/vendor/bundle/ruby/2.4.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 cruby.bundle ./.gem.20191027-85892-1aght8y/skiptrace/internal

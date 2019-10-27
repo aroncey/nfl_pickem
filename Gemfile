@@ -6,7 +6,8 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use postgreSQL as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.7.0'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -71,4 +72,5 @@ gem 'momentjs-rails'
 
 gem 'twilio-ruby', '~> 4.11.1'
 
-ruby "2.4.6"
+source "https://rubygems.org"
+ruby "2.6.3"
