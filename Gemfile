@@ -74,4 +74,4 @@ gem 'twilio-ruby', '~> 4.11.1'
 
 gem 'rails_12factor'
 
-ruby "2.6.3"
+ruby "2.6.5"
