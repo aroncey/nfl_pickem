@@ -4,9 +4,9 @@ class Standings extends React.Component {
     }
 
     componentDidMount() {
-        $('.dropdown-button').dropdown({
-          hover: true
-        })
+      const elems = document.querySelectorAll('#dropdowner');
+      const instances = M.Dropdown.init(elems)
+      $('#dropdowner').dropdown()
     }
 
     changeWeek(e) {
@@ -31,6 +31,10 @@ class Standings extends React.Component {
         var _this = this;
         var userRecordNodes = this.getUserRecordNodes(JSON.parse(this.props.users));
 
+        $('#dropdowner').dropdown({
+            hover: true
+          })
+
         return (
             <div id="standings" className="card weekly-picks-card">
                 <div className="card-content">
@@ -44,7 +48,7 @@ class Standings extends React.Component {
                         </button>
                       </span>
                       <span className="dd">
-                        <a className='dropdown-button btn blue white-text darken-4' data-hover="true" data-activates='dropdown1'>
+                        <a id="dropdowner" className='dropdown-button btn blue white-text darken-4' data-hover="true" data-activates='dropdown1'>
                           <p>Week: {this.state.week}</p></a>
                         <ul id='dropdown1' className='card-panel dropdown-content black-text text-darken-4' onClick={this.changeWeek.bind(this)}>
                             {this.getWeekOptions()}

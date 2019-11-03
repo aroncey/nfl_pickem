@@ -92,12 +92,28 @@ nav {
         }
       }
     }
-#picks{
+
+//CSS for HISTORY pages
+#previous {
+  position: absolute;
+  width: auto;
+}
+#previous * #picks{
+  position: relative !important;
+  overflow-x: hidden;
 
 }
+
 #standings{
   .dd{
-    margin-left: 5px;
+    position: absolute;
+    top: 25px;
+    right: 20px;
+  }
+  .curweek{
+    position: absolute;
+    top: 25px;
+    right: 165px;
   }
 }
 
@@ -140,13 +156,32 @@ z-index: 100px;
       top: 67px !important;
     }
     #backbar {
-       width: 50px;
+       width: 50px !important;
+    }
+    #backbar:hover {
+       width: 50px !important;
+    }
+    #backbar span {
+       display: none !important;
+    }
+    #picks{
+      overflow-x: hidden;
+    }
+
+    #previous {
+      margin-left: -11px;
     }
 }
 // MOBILE VIEW landscape
 @media (hover:none) and (orientation: landscape) {
   #backbar {
-    width: 50px;
+     width: 50px !important;
+  }
+  #backbar:hover {
+     width: 50px !important;
+  }
+  #backbar span {
+     display: none !important;
   }
 }
 //iphone 5/SE
@@ -208,7 +243,14 @@ and (orientation : portrait) {
       height: 488px;
     }
     .dd {
-      margin-left: 0px !important;
+      position: absolute;
+      top: 7px !important;
+      left: 5px !important;
+    }
+    .curweek {
+      position: absolute;
+      top: 12px !important;
+      left: 5px !important;
     }
     .dd a{
       position: absolute;
@@ -225,10 +267,7 @@ and (orientation : portrait) {
       position: absolute;
       left: 0px;
     }
-    .curweek {
-      position: absolute;
-      top: 0px;
-    }
+
     .curweek button{
       position: absolute;
       top: 34px;
@@ -256,10 +295,6 @@ and (orientation : portrait) {
     }
 }
 //iphone 6/7/8 - landscape
-  // @media only screen
-  // and (min-device-width :667px)
-  // and (max-device-width : 667px)
-  // and (orientation : landscape) {
 @media only screen
   and (min-device-width: 375px)
   and (max-device-width: 667px)
@@ -326,10 +361,12 @@ and (orientation : portrait) {
       height: 85%
     }
     .dd {
-      position: absolute;
-      top: 0px;
-      left: 1px;
-      margin-left: 0px !important;
+      top: 6px !important;
+      left: 0px;
+    }
+    .curweek {
+      top: 10px !important;
+      left: 0px !important;
     }
     .dd > a{
       position: absolute;
@@ -440,12 +477,15 @@ and (orientation : portrait) {
       width: 300px;
       height: 732px;
     }
-    .dd {
-      position: absolute;
-      top: 0px;
-      left: 11px;
-      margin-left: 0px !important;
-    }
+    // .dd {
+    //   top: 6px !important;
+    // }
+    // .dd {
+    //   position: absolute;
+    //   top: 0px;
+    //   left: 11px;
+    //   margin-left: 0px !important;
+    // }
     .dd a{
       position: absolute;
       top: 1px;
