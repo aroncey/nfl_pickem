@@ -137,6 +137,9 @@ nav {
     #dropdown1 li{
       text-align: center;
     }
+    .dropdown-content li > a{
+        text-align: center;
+    }
 }
 
 
@@ -384,15 +387,9 @@ and (orientation : portrait) {
       width: 100%;
       display: inline-block;
     }
-    // #dropdown1{
-    //   overflow: hidden;
-    // }
-    // .dropdown-content li > a, .dropdown-content li > span {
-    //   left: 10px;
-    // }
-    // .dropdown-content li {
-    //   position: relative;
-    // }
+    .dropdown-content li > a{
+      text-align: center;
+    }
 }
 
 //iphone 6/7/8 - portrait
@@ -603,7 +600,7 @@ and (orientation : portrait) {
       }
     }
     .dd a{
-      position: absolute;
+      text-align: center;
       top: 4px;
       left: 160px;
       height: 31px;
@@ -784,6 +781,7 @@ and (-webkit-min-device-pixel-ratio: 2)
     top: 20px;
     left: 321px;
     white-space: nowrap;
+
   }
   .curweek {
     position: absolute;

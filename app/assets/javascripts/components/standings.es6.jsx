@@ -8,15 +8,21 @@ class Standings extends React.Component {
         })
     }
     changeWeek(e) {
+        var instance = M.Dropdown.getInstance($('#dropdownWeeks'));
         var text = e.target.text
         var week = (text === 'all') ? text : parseInt(text)
         this.setState({week: week})
+        instance.close();
     }
 
     currentWeek() {
       this.setState({week: this.props.current_week})
     }
+    openDropdown(){
+      var instance = M.Dropdown.getInstance($('#dropdownWeeks'));
+      instance.open();
 
+    }
     getWeekOptions() {
         var weekOptions = [<li key='all'><a>all</a></li>]
         for (var i = 1; i <= this.props.current_week; i++) {
@@ -42,8 +48,8 @@ class Standings extends React.Component {
                           </button>
                       </span>
                       <span className="dd">
-                          <a id="dropdownWeeks" className='dropdown-trigger btn blue white-text darken-4' data-target='dropdowner'>
-                            <p id='dropdownWeeks'>Week: {this.state.week}</p>
+                          <a id="dropdownWeeks" className='dropdown-trigger btn blue white-text darken-4' data-target='dropdowner' onClick={this.openDropdown.bind(this)}>
+                            <p >Week: {this.state.week}</p>
                           </a>
                           <ul id='dropdowner' className='card-panel dropdown-content black-text text-darken-4' onClick={this.changeWeek.bind(this)}>
                               {this.getWeekOptions()}
