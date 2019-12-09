@@ -52,7 +52,7 @@ nav {
   white-space: nowrap;
   color: white;
   font-size: 11px;
-  z-index: 500;
+  z-index: 1000;
     #backbar{
         background-color: #000080;
         width: 50px;
@@ -63,7 +63,7 @@ nav {
         -webkit-box-shadow: 3px 1px 6px 1px rgba(87,87,89,0.99);
         -moz-box-shadow: 3px 1px 6px 1px rgba(87,87,89,0.99);
         box-shadow: 3px 1px 6px 1px rgba(87,87,89,0.99);
-    }
+      }
     .active {
           color: white;
           font-size: 12px;
@@ -92,7 +92,9 @@ nav {
         }
       }
     }
-
+#picks {
+   z-index: 300 !important;
+}
 //CSS for HISTORY pages
 #previous {
   position: absolute;
@@ -101,37 +103,43 @@ nav {
 #previous * #picks{
   position: relative !important;
   overflow-x: hidden;
-
 }
 
+//=================================================
+//---------------- STRANINGS ---------------------
+//=================================================
 #standings{
-  .dd{
-    position: absolute;
-    top: 25px;
-    right: 20px;
-  }
-  .curweek{
-    position: absolute;
-    top: 25px;
-    right: 165px;
-  }
+  overflow-x: hidden;
+    .dd {
+        position: absolute;
+        top: 25px;
+        right: 20px;
+    }
+    .curweek {
+        position: absolute;
+        top: 25px;
+        right: 165px;
+    }
+    #standingContent{
+      position: relative;
+      // top: 120px;
+    }
+    .card-panel{
+        padding: 0px !important;
+    }
+    .dropdowner{
+      width: 110px;
+      position: relative;
+      left: 171px;
+      z-index: 50;
+      top: 25px;
+    }
+    #dropdown1 li{
+      text-align: center;
+    }
 }
 
-// HOVER
-#backbar:hover{
-z-index: 100px;
-  width: 140px !important;
-  -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
-  transition: width 1s;
-  li span {
-    display: inline-block;
-    -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
-    transition: width 1s;
-  }
-  .card.weekly-picks-card {
-    margin-left: 85px;
-  }
-}
+
 #standings{
   width: 89% !important;
   @media screen and (min-width: 800px) {
@@ -144,7 +152,53 @@ z-index: 100px;
     width: 92% !important;
   }
 }
+//=================================================
+//---------------- MOBILE VIEW ---------------------
+//=================================================
+@media (hover:none) {
+  #standings{
+    .title-row{
+      z-index: 101;
+      background-color: white;
+      position: fixed;
+    }
+    .weekSelectbtns{
 
+    }
+    .tableHeader{
+      position: relative;
+      top: 10px;
+      left: 11px;
+      font-size: 11px;
+    }
+    .nameRank{
+    }
+    .stats{
+      position: relative;
+      left: 80px;
+      .w{
+
+      }
+      .l{
+
+      }
+      .p{
+        padding-left: 10px;
+      }
+      .pts{
+
+      }
+    }
+    .userRecords{
+      position: relative;
+      top: 120px;
+      z-index: 1;
+      tr{
+        width: 100%;
+      }
+    }
+  }
+}
 // MOBILE VIEW PORTRAIT
 @media (hover:none) and (orientation: portrait) {
     nav{
@@ -152,9 +206,20 @@ z-index: 100px;
       /* top: 66px; */
       z-index: 5000;
     }
-    .dropdown-content{
-      top: 67px !important;
+    #standings{
+      .title-row{
+        top: 70px;
+        height: 120px;
+        width: 100%;
+        left: 70px;
+        z-index: 58;
+      }
+      #standingContent{
+        position: relative;
+        top: 120px;
+      }
     }
+
     #backbar {
        width: 50px !important;
     }
@@ -164,10 +229,9 @@ z-index: 100px;
     #backbar span {
        display: none !important;
     }
-    #picks{
+    #picks {
       overflow-x: hidden;
     }
-
     #previous {
       margin-left: -11px;
     }
@@ -182,6 +246,53 @@ z-index: 100px;
   }
   #backbar span {
      display: none !important;
+  }
+  #standings{
+    .title-row{
+      z-index: 101;
+      background-color: white;
+      position: fixed;
+      width: 100%;
+      height: 120px;
+    }
+    .weekSelectbtns{
+      position: absolute;
+      top: 2px !important;
+      left: 600px;
+      z-index: 150;
+    }
+    .tableHeader{
+      position: relative;
+      top: 10px;
+      left: 27px;
+      font-size: 11px;
+    }
+    .nameRank{
+    }
+    .stats{
+      position: relative;
+      left: 80px;
+      .w{
+
+      }
+      .l{
+
+      }
+      .p{
+        padding-left: 10px;
+      }
+      .pts{
+
+      }
+    }
+    .userRecords{
+      position: relative;
+      top: 120px;
+      z-index: 1;
+      tr{
+        width: 100%;
+      }
+    }
   }
 }
 //iphone 5/SE
@@ -203,19 +314,11 @@ z-index: 100px;
     margin-left: 0px !important;
   }
   .dd a{
-    position: absolute;
-    top: 20px;
-    left: 321px;
     white-space: nowrap;
   }
   .curweek {
-    position: absolute;
-    top: 0px;
   }
   .curweek button{
-    position: absolute;
-    top: 21px;
-    left: 150px;
     white-space: nowrap;
   }
 }
@@ -236,6 +339,12 @@ and (orientation : portrait) {
     #standings{
       width: 78% !important;
       height: 485px;
+
+      .title-row {
+      }
+      .userRecords{
+
+      }
     }
     .card.distribution-card{
       margin: 31px;
@@ -253,9 +362,6 @@ and (orientation : portrait) {
       left: 5px !important;
     }
     .dd a{
-      position: absolute;
-      top: 2px;
-      left: 150px;
       height: 31px;
       width: 90px;
       font-size: 10px;
@@ -269,9 +375,6 @@ and (orientation : portrait) {
     }
 
     .curweek button{
-      position: absolute;
-      top: 34px;
-      left: 150px;
       height: 29px;
       width: 90px;
       font-size: 10px;
@@ -280,65 +383,18 @@ and (orientation : portrait) {
     .curweek button p {
       width: 100%;
       display: inline-block;
-      position: absolute;
-      left: 0px;
-      top: -2px;
     }
-    #dropdown1{
-      overflow: hidden;
-    }
-    .dropdown-content li > a, .dropdown-content li > span {
-      left: 10px;
-    }
-    .dropdown-content li {
-      position: relative;
-    }
+    // #dropdown1{
+    //   overflow: hidden;
+    // }
+    // .dropdown-content li > a, .dropdown-content li > span {
+    //   left: 10px;
+    // }
+    // .dropdown-content li {
+    //   position: relative;
+    // }
 }
-//iphone 6/7/8 - landscape
-@media only screen
-  and (min-device-width: 375px)
-  and (max-device-width: 667px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) {
-  #picks {
-    height: 295px !important;
-    width: 597px !important;
 
-    .select-team {
-      display: none;
-    }
-    #columnName #teamName{
-        display: none !important;
-    }
-  }
-  #standings {
-    height: 78% !important;
-  }
-  .card.distribution-card{
-    margin: 31px;
-    width: 570px;
-    height: 240px;
-  }
-  .dd {
-    margin-left: 0px !important;
-  }
-  .dd a{
-    position: absolute;
-    top: 20px;
-    left: 321px;
-    white-space: nowrap;
-  }
-  .curweek {
-    position: absolute;
-    top: 0px;
-  }
-  .curweek button{
-    position: absolute;
-    top: 20px;
-    left: 150px;
-    white-space: nowrap;
-  }
-}
 //iphone 6/7/8 - portrait
 @media only screen
 and (min-device-width : 375px)
@@ -355,17 +411,19 @@ and (orientation : portrait) {
     #standings{
       width: 304px !important;
       height: 85% !important;
+      .title-row{
+      }
     }
     .card.distribution-card{
       width: 290px;
       height: 85%
     }
     .dd {
-      top: 6px !important;
+      top: 8px !important;
       left: 0px;
     }
     .curweek {
-      top: 10px !important;
+      top: 12px !important;
       left: 0px !important;
     }
     .dd > a{
@@ -408,12 +466,51 @@ and (orientation : portrait) {
     #dropdown1{
       overflow: hidden;
     }
-    .dropdown-content li > a, .dropdown-content li > span {
-      left: 10px;
+    // .dropdown-content li > a, .dropdown-content li > span {
+    //   left: 10px;
+    // }
+    // .dropdown-content li {
+    //   position: relative;
+    // }
+}
+//iphone 6/7/8 - landscape
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+  #picks {
+    height: 295px !important;
+    width: 597px !important;
+
+    .select-team {
+      display: none;
     }
-    .dropdown-content li {
-      position: relative;
+    #columnName #teamName{
+        display: none !important;
     }
+  }
+  .card.distribution-card{
+    margin: 31px;
+    width: 570px;
+    height: 240px;
+  }
+  #standings {
+    height: 64% !important;
+
+    .dd {
+      margin-left: 0px !important;
+    }
+    .dd a{
+      white-space: nowrap;
+    }
+    .curweek {
+      position: absolute;
+    }
+    .curweek button{
+      white-space: nowrap;
+    }
+  }
 }
 //iphone X - landscape
 @media only screen
@@ -428,6 +525,9 @@ and (orientation : portrait) {
       #standings{
         width: 738px !important;
         height: 292px !important;
+          .userRecords{
+
+          }
       }
       .card.distribution-card{
         margin: 31px;
@@ -467,28 +567,44 @@ and (orientation : portrait) {
     #picks {
       width: 80% !important;
       height: 89% !important;
-    }
-    #standings{
-      width: 300px !important;
-      height: 729px !important;
+
     }
     .card.distribution-card{
       margin: 31px;
       width: 300px;
       height: 732px;
     }
-    // .dd {
-    //   top: 6px !important;
-    // }
-    // .dd {
-    //   position: absolute;
-    //   top: 0px;
-    //   left: 11px;
-    //   margin-left: 0px !important;
-    // }
+    #standings{
+      width: 300px !important;
+      height: 729px !important;
+
+      .title-row {
+      }
+      .tableHeader{
+        background-color: red;
+        background-color: red;
+        position: fixed;
+        left: 200px;
+        th {
+          padding: 0px;
+          display: inline-block;
+        }
+        .name{
+          position: fixed;
+        }
+        .rank{
+          position: fixed;
+        }
+      }
+      table {
+        top: 125px;
+        position: relative;
+        width: 100%;
+      }
+    }
     .dd a{
       position: absolute;
-      top: 1px;
+      top: 4px;
       left: 160px;
       height: 31px;
       width: 114px;
@@ -509,8 +625,8 @@ and (orientation : portrait) {
     }
     .curweek button{
       position: absolute;
-      top: 18px;
-      left: 50px;
+      top: 38px;
+      left: 165px;
       height: 29px;
       width: 114px;
       font-size: 10px;
@@ -526,12 +642,12 @@ and (orientation : portrait) {
     #dropdown1{
       overflow: hidden;
     }
-    .dropdown-content li > a, .dropdown-content li > span {
-      left: 10px;
-    }
-    .dropdown-content li {
-      position: relative;
-    }
+    // .dropdown-content li > a, .dropdown-content li > span {
+    //   left: 10px;
+    // }
+    // .dropdown-content li {
+    //   position: relative;
+    // }
 }
 //Pixel 2 - portrait
 //pixel 2 - landscape

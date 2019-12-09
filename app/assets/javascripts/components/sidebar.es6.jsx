@@ -1,31 +1,43 @@
-class Sidebar extends React.Component {
+// import M from "materialize-css";
 
-    render () {
+class Sidebar extends React.Component {
+  componentWillMount () {
+      $(document).ready(function(){
+        $('.tooltipped').tooltip();
+      });
+  }
+  componentDidMount() {
+    $(document).ready(function(){
+      $('.tooltipped').tooltip();
+    });
+  }
+
+  render () {
         return (
 
             <div id="sidebar">
               <div id="backbar">
                       <ul>
                           <li className={this.isActive('picks') && "active"}>
-                              <a href="/picks">
+                              <a  className="tooltipped" href="/picks" data-html="true" data-position="right" data-tooltip="Active Picks">
                                   <i id="icons" className="material-icons">touch_app</i>
                                   <span id="sidebarNames">Active Picks</span>
                               </a>
                           </li>
                           <li className={this.isActive('previous') && "active"}>
-                              <a href="/previous">
+                                <a className="tooltipped" data-position="right" data-tooltip="Past Weeks" href="/previous">
                                   <i  id="icons" className="material-icons">skip_previous</i>
                                   <span id="sidebarNames" className="tooltipped" data-position="right" data-delay="50" data-tooltip="History">History</span>
                               </a>
                           </li>
                           <li className={this.isActive('standings') && "active"}>
-                              <a href="/standings">
-                                  <i  id="icons" className="material-icons">star</i>
+                              <a className="tooltipped" href="/standings" data-html="true" data-position="right" data-tooltip="Standings" >
+                                  <i id="icons" className="material-icons">star</i>
                                   <span id="sidebarNames">Standings</span>
                               </a>
                           </li>
                           <li className={this.isActive('distribution') && "active"}>
-                              <a href="/distribution">
+                              <a  className="tooltipped" href="/distribution" data-html="true" data-position="right" data-tooltip="Distributions" >
                                   <i  id="icons" className="material-icons">equalizer</i>
                                   <span id="sidebarNames">Distributions</span>
                               </a>

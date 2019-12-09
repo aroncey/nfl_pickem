@@ -2,13 +2,11 @@ class Standings extends React.Component {
     componentWillMount () {
         this.setState({week: 'all'})
     }
-
     componentDidMount() {
-      const elems = document.querySelectorAll('#dropdowner');
-      const instances = M.Dropdown.init(elems)
-      $('#dropdowner').dropdown()
+      $('#dropdownWeeks').dropdown({
+          hover: true
+        })
     }
-
     changeWeek(e) {
         var text = e.target.text
         var week = (text === 'all') ? text : parseInt(text)
@@ -31,10 +29,6 @@ class Standings extends React.Component {
         var _this = this;
         var userRecordNodes = this.getUserRecordNodes(JSON.parse(this.props.users));
 
-        $('#dropdowner').dropdown({
-            hover: true
-          })
-
         return (
             <div id="standings" className="card weekly-picks-card">
                 <div className="card-content">
@@ -43,19 +37,20 @@ class Standings extends React.Component {
                   <div className="row title-row">
                       <span className="card-title">Standings</span>
                       <span className="curweek">
-                        <button className="waves-effect blue waves-light white-text darken-4 btn-flat" onClick={this.currentWeek.bind(this)}>
-                              <p>Current Week</p>
-                        </button>
+                          <button className="waves-effect blue waves-light white-text darken-4 btn-flat" onClick={this.currentWeek.bind(this)}>
+                                <p>Current Week</p>
+                          </button>
                       </span>
                       <span className="dd">
-                        <a id="dropdowner" className='dropdown-button btn blue white-text darken-4' data-hover="true" data-activates='dropdown1'>
-                          <p>Week: {this.state.week}</p></a>
-                        <ul id='dropdown1' className='card-panel dropdown-content black-text text-darken-4' onClick={this.changeWeek.bind(this)}>
-                            {this.getWeekOptions()}
-                        </ul>
+                          <a id="dropdownWeeks" className='dropdown-trigger btn blue white-text darken-4' data-target='dropdowner'>
+                            <p id='dropdownWeeks'>Week: {this.state.week}</p>
+                          </a>
+                          <ul id='dropdowner' className='card-panel dropdown-content black-text text-darken-4' onClick={this.changeWeek.bind(this)}>
+                              {this.getWeekOptions()}
+                          </ul>
                       </span>
                     </div>
-                    <table className="bordered">
+                    <table id="standingContent" className="bordered">
                         <tbody>
                             <tr>
                                 <th data-id="rank"></th>
